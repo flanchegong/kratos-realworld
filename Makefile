@@ -55,6 +55,11 @@ generate:
 	go generate ./...
 	go mod tidy
 
+.PHONY: wire
+# generate
+wire:
+	cd cmd/server/ && wire
+
 .PHONY: all
 # generate all
 all:
