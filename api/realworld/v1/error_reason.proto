@@ -6,6 +6,6 @@ option go_package = "github.com/go-kratos/kratos-realworld/api/realworld/v1;v1";
 
 
 enum ErrorReason {
-  GREETER_UNSPECIFIED = 0;
+  REALWORLD_UNSPECIFIED = 0;
   USER_NOT_FOUND = 1;
 }
