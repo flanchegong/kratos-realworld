@@ -77,7 +77,7 @@ service RealWorld {
 
   rpc CreateArticle(CreateArticleRequest) returns(SingleArticleReply){
     option (google.api.http) = {
-      post:"/api/articles/",
+      post:"/api/articles",
       body:"*",
     };
   }
@@ -137,7 +137,7 @@ service RealWorld {
 }
 
 message GetTagsRequest{
-  
+
 }
 
 message FavoriteArticleRequest{
