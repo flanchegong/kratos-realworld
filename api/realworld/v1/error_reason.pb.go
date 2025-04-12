@@ -24,19 +24,19 @@ const (
 type ErrorReason int32
 
 const (
-	ErrorReason_GREETER_UNSPECIFIED ErrorReason = 0
-	ErrorReason_USER_NOT_FOUND      ErrorReason = 1
+	ErrorReason_REALWORLD_UNSPECIFIED ErrorReason = 0
+	ErrorReason_USER_NOT_FOUND        ErrorReason = 1
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
-		0: "GREETER_UNSPECIFIED",
+		0: "REALWORLD_UNSPECIFIED",
 		1: "USER_NOT_FOUND",
 	}
 	ErrorReason_value = map[string]int32{
-		"GREETER_UNSPECIFIED": 0,
-		"USER_NOT_FOUND":      1,
+		"REALWORLD_UNSPECIFIED": 0,
+		"USER_NOT_FOUND":        1,
 	}
 )
 
@@ -71,9 +71,9 @@ var File_realworld_v1_error_reason_proto protoreflect.FileDescriptor
 
 const file_realworld_v1_error_reason_proto_rawDesc = "" +
 	"\n" +
-	"\x1frealworld/v1/error_reason.proto\x12\frealworld.v1*:\n" +
-	"\vErrorReason\x12\x17\n" +
-	"\x13GREETER_UNSPECIFIED\x10\x00\x12\x12\n" +
+	"\x1frealworld/v1/error_reason.proto\x12\frealworld.v1*<\n" +
+	"\vErrorReason\x12\x19\n" +
+	"\x15REALWORLD_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0eUSER_NOT_FOUND\x10\x01B;Z9github.com/go-kratos/kratos-realworld/api/realworld/v1;v1b\x06proto3"
 
 var (
