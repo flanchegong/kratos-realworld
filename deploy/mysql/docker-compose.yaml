@@ -3,6 +3,6 @@
     rwdb:
       image: mysql:8
       environment:
-        MYSQL_ROOT_PASSWORD: 
+        MYSQL_ROOT_PASSWORD: dangerous
       posts:
         - 3306:3306  
