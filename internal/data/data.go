@@ -26,7 +26,7 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 }
 
 func NewDB(c *conf.Data) *gorm.DB {
-	db, err := gorm.Open(mysql.Open("root:dangerous@tcp(127.0.0.1:3306)/rwdb?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open("root:dangerous@tcp(127.0.0.1:3306)/realworld?charset=utf8mb4&parseTime=True&loc=Local"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
