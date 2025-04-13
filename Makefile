@@ -60,6 +60,12 @@ generate:
 wire:
 	cd cmd/server/ && wire
 
+.PHONY: run
+# run
+run:
+	kratos run
+
+
 .PHONY: all
 # generate all
 all:
