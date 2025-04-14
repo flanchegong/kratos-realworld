@@ -27,3 +27,12 @@ func (s *RealWorldService) Login(ctx context.Context, req *v1.LoginRequest) (rep
 		},
 	}, nil
 }
+
+func (s *RealWorldService) Register(ctx context.Context, req *v1.RegisterRequest) (reply *v1.UserReply, err error) {
+	return &v1.UserReply{
+		User: &v1.UserReply_User{
+			Username: "flanche",
+			// Add other required fields here if necessary
+		},
+	}, nil
+}

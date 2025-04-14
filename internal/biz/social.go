@@ -19,6 +19,34 @@ type RealWorld struct {
 	Hello string
 }
 
+type ArticleRepo interface {
+}
+
+type CommentRepo interface {
+}
+
+type TagRepo interface {
+}
+
+type SocialUsecase struct {
+	ar  ArticleRepo
+	cr  CommentRepo
+	tr  TagRepo
+	log *log.Helper
+}
+
+// NewRealWorldUsecase new a RealWorld usecase.
+func NewSocialUsecase(ar ArticleRepo,
+	cr CommentRepo,
+	tr TagRepo, logger log.Logger) *SocialUsecase {
+	return &SocialUsecase{
+		ar:  ar,
+		cr:  cr,
+		tr:  tr,
+		log: log.NewHelper(logger),
+	}
+}
+
 // RealWorldRepo is a Greater repo.
 type RealWorldRepo interface {
 	Save(context.Context, *RealWorld) (*RealWorld, error)
@@ -34,16 +62,7 @@ type RealWorldUsecase struct {
 	log  *log.Helper
 }
 
-// NewRealWorldUsecase new a RealWorld usecase.
-func NewRealWorldUsecase(repo RealWorldRepo, logger log.Logger) *RealWorldUsecase {
-	return &RealWorldUsecase{
-		repo: repo,
-		log:  log.NewHelper(logger),
-	}
-}
-
 // CreateRealWorld creates a RealWorld, and returns the new RealWorld.
-func (uc *RealWorldUsecase) CreateRealWorld(ctx context.Context, g *RealWorld) (*RealWorld, error) {
-	uc.log.WithContext(ctx).Infof("CreateRealWorld: %v", g.Hello)
-	return uc.repo.Save(ctx, g)
+func (uc *SocialUsecase) CreateArticle(ctx context.Context) error {
+	return nil
 }
