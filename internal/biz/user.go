@@ -19,13 +19,22 @@ type User struct {
 
 func hashPassword(pwd string) string {
 	// Implement your password hashing logic here.
-	b,err:=bcrypt.GenerateFromPassword([]byte(pwd), bcrypt.DefaultCost)
-	if err!=nil{
+	b, err := bcrypt.GenerateFromPassword([]byte(pwd), bcrypt.DefaultCost)
+	if err != nil {
 		panic(err)
-		
+
 	}
 	fmt.Printf("hashPassword: %s\n", b)
 	return string(b)
+}
+
+func verifyPassword(hashed, password string) bool {
+	// Implement your password verification logic here.
+	err := bcrypt.CompareHashAndPassword([]byte(hashed), []byte(password))
+	if err != nil {
+		return false
+	}
+	return true
 }
 
 type UserLogin struct {
