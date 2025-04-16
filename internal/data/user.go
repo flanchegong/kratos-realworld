@@ -21,9 +21,9 @@ func NewUserRepo(data *Data, logger log.Logger) biz.UserRepo {
 	}
 }
 
-func (r *userRepo) CreateUser(ctx context.Context, u *biz.User) error {
+func (r *userRepo) CreateUser(ctx context.Context, u *biz.User) (*biz.User, error) {
 	// Implement the logic to create a user and return the created user and error if any.
-	return nil
+	return u, nil
 }
  
 func (r *userRepo) GetUserByEmail(ctx context.Context, email string) (*biz.User, error) {

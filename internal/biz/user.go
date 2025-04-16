@@ -2,6 +2,7 @@ package biz
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/go-kratos/kratos/v2/log"
@@ -10,11 +11,18 @@ import (
 
 type User struct {
 	Email        string
-	Token        string
 	Username     string
 	Bio          string
 	Image        string
 	PasswordHash string
+}
+
+type UserLogin struct {
+	Email    string
+	Username string
+	Token    string
+	Bio      string
+	Image    string
 }
 
 func hashPassword(pwd string) string {
@@ -37,10 +45,6 @@ func verifyPassword(hashed, password string) bool {
 	return true
 }
 
-type UserLogin struct {
-	Email string `json:"email"`
-}
-
 type UserRepo interface {
 	CreateUser(ctx context.Context, user *User) (*User, error)
 	GetUserByEmail(ctx context.Context, email string) (*User, error)
@@ -61,14 +65,37 @@ func NewUserUsecase(ur UserRepo, pr ProfileRepo, logger log.Logger) *UserUsecase
 }
 
 // CreateRealWorld creates a RealWorld, and returns the new RealWorld.
-func (uc *UserUsecase) Register(ctx context.Context, u *User) error {
+func (uc *UserUsecase) Register(ctx context.Context, username, email, password string) (*UserLogin, error) {
+	u := &User{
+		Email:        email,
+		Username:     username,
+		PasswordHash: hashPassword(password),
+	}
 	if _, err := uc.ur.CreateUser(ctx, u); err != nil {
 		uc.log.Errorf("failed to create user: %v", err)
-		return err
+		return nil, err
 	}
-	return nil
+	return &UserLogin{
+		Email:    email,
+		Username: username,
+		Token:    "abc",
+	}, nil
 }
 
-func (uc *UserUsecase) Login(ctx context.Context, email, password string) (*User, error) {
-	return nil, nil
+func (uc *UserUsecase) Login(ctx context.Context, email, password string) (*UserLogin, error) {
+	u, err := uc.ur.GetUserByEmail(ctx, email)
+	if err != nil {
+		return nil, err
+	}
+	if !verifyPassword(u.PasswordHash, password) {
+		return nil, errors.New("password is incorrect")
+	}
+
+	return &UserLogin{
+		Email:    u.Email,
+		Username: u.Username,
+		Bio:      u.Bio,
+		Image:    u.Image,
+		Token:    "abc",
+	}, nil
 }
