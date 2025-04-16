@@ -8,6 +8,7 @@ import "google/protobuf/duration.proto";
 message Bootstrap {
   Server server = 1;
   Data data = 2;
+  JWT jwt = 3;
 }
 
 message Server {
@@ -21,12 +22,10 @@ message Server {
     string addr = 2;
     google.protobuf.Duration timeout = 3;
   }
-  message JWT {
-    string token = 1;
-  }
+
   HTTP http = 1;
   GRPC grpc = 2;
-  JWT jwt = 3;
+ 
 }
 
 message Data {
@@ -34,4 +33,8 @@ message Data {
     string dsn = 1;
   }
   Database database = 1;
+}
+
+message JWT {
+  string token = 1;
 }
