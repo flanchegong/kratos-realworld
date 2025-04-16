@@ -31,7 +31,7 @@ func wireApp(confServer *conf.Server, confData *conf.Data, jwt *conf.JWT, logger
 	}
 	userRepo := data.NewUserRepo(dataData, logger)
 	profileRepo := data.NewProfileRepo(dataData, logger)
-	userUsecase := biz.NewUserUsecase(userRepo, profileRepo, logger)
+	userUsecase := biz.NewUserUsecase(userRepo, profileRepo, logger, jwt)
 	realWorldService := service.NewRealWorldService(userUsecase, logger)
 	grpcServer := server.NewGRPCServer(confServer, realWorldService, logger)
 	httpServer := server.NewHTTPServer(confServer, jwt, realWorldService, logger)
