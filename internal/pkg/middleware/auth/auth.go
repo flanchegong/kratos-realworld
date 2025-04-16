@@ -17,7 +17,7 @@ const (
 	bearerWord string = "Token"
 )
 
-func GenerateToken(username string) string {
+func GenerateToken(secret, username string) string {
 	// Create the token using your secret key and signing method
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"username": username,
@@ -25,7 +25,7 @@ func GenerateToken(username string) string {
 	})
 
 	// Sign the token with your secret key
-	tokenString, err := token.SignedString([]byte("secret"))
+	tokenString, err := token.SignedString([]byte(secret))
 	if err != nil {
 		panic(err)
 	}
