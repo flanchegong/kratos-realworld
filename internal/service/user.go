@@ -3,24 +3,18 @@ package service
 import (
 	"context"
 
+	"github.com/go-kratos/kratos-layout/internal/errors"
+
 	v1 "github.com/go-kratos/kratos-layout/api/realworld/v1"
 	// Ensure the Article type is defined in the v1 package
 	// If not, define it in the appropriate location
 )
 
 func (s *RealWorldService) Login(ctx context.Context, req *v1.LoginRequest) (reply *v1.UserReply, err error) {
-	// // 1. Validate the request
-	// if err := validateLoginRequest(req); err != nil {
-	// 	return nil, err
-	// }
+	if len(req.User.Email) == 0 {
+		return nil, errors.NewHTTPError(422, "email can't be empty", "validation error")
+	}
 
-	// // 2. Call the use case to handle the login logic
-	// user, err := s.uc.Login(ctx, req.Username, req.Password)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// 3. Create a response and return it
 	return &v1.UserReply{
 		User: &v1.UserReply_User{
 			Username: "flanche",
